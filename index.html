@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ARV and MAO Calculator</title>
+  <style>
+    /* Futuristic Styles */
+    /* Body Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 20px;
+      background-color: #f2f2f2;
+      /* Light gray background */
+      color: #333;
+      /* Dark gray text */
+    }
+
+    /* Header Styles */
+    h1 {
+      text-align: center;
+      color: #ff7f00;
+      /* Orange color for header */
+      text-shadow: 0 0 10px rgba(255, 127, 0, 0.5);
+      /* Subtle glow effect */
+    }
+
+    /* Label Styles */
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #666;
+      /* Dark gray */
+    }
+
+    /* Input and Button Styles */
+    input[type="number"],
+    input[type="text"],
+    button {
+      display: block;
+      width: 100%;
+      margin-top: 5px;
+      padding: 8px;
+      border: 1px solid #ff7f00;
+      /* Orange border */
+      border-radius: 4px;
+      font-size: 16px;
+      background-color: #f9f9f9;
+      /* Light gray background */
+      color: #333;
+      /* Dark gray text */
+    }
+
+    /* Container Styles */
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff;
+      /* White background */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(255, 127, 0, 0.3);
+      /* Subtle orange glow */
+    }
+
+    /* Section Styles */
+    .section {
+      margin-bottom: 20px;
+    }
+
+    /* Section Title Styles */
+    .section-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #ff7f00;
+      /* Orange color for section titles */
+      text-shadow: 0 0 5px rgba(255, 127, 0, 0.3);
+      /* Subtle glow effect */
+    }
+
+    /* Section Content Styles */
+    .section-content {
+      background-color: #f2f2f2;
+      /* Light gray background */
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    /* Adjustment Container Styles */
+    .adjustment-container {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Adjustment Container Select Styles */
+    .adjustment-container select {
+      margin-right: 5px;
+      background-color: #f9f9f9;
+      /* Light gray background */
+      color: #333;
+      /* Dark gray text */
+      border: 1px solid #ff7f00;
+      /* Orange border */
+    }
+
+    /* Adjustment Container Input Styles */
+    .adjustment-container input[type="number"] {
+      flex: 1;
+    }
+
+    /* Results Styles */
+    .results {
+      margin-top: 20px;
+      border: 1px solid #ff7f00;
+      /* Orange border */
+      border-radius: 4px;
+      padding: 10px;
+      background-color: #f2f2f2;
+      /* Light gray background */
+    }
+
+    /* Results Title Styles */
+    .results-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #ff7f00;
+      /* Orange color for results title */
+      text-shadow: 0 0 5px rgba(255, 127, 0, 0.3);
+      /* Subtle glow effect */
+    }
+
+    /* Results Content Styles */
+    .results-content {
+      margin-bottom: 5px;
+    }
+
+    /* Copy Button Styles */
+    .copy-button {
+      background-color: #ff7f00;
+      /* Orange background */
+      color: #fff;
+      /* White text */
+      cursor: pointer;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 16px;
+      margin-top: 10px;
+      box-shadow: 0 0 10px rgba(255, 127, 0, 0.5);
+      /* Subtle glow effect */
+      transition: all 0.3s ease;
+      /* Smooth transition effect */
+    }
+
+    /* Copy Button Hover Styles */
+    .copy-button:hover {
+      background-color: #ff6600;
+      /* Slightly darker orange on hover */
+      box-shadow: 0 0 15px rgba(255, 127, 0, 0.8);
+      /* Stronger glow effect on hover */
+    }
+
+    /* Reset Button Styles */
+    .reset-button {
+      background-color: #999;
+      /* Dark gray background */
+      color: #fff;
+      /* White text */
+      cursor: pointer;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 16px;
+      margin-top: 10px;
+      margin-right: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      /* Subtle black glow effect */
+      transition: all 0.3s ease;
+      /* Smooth transition effect */
+    }
+
+    /* Reset Button Hover Styles */
+    .reset-button:hover {
+      background-color: #666;
+      /* Slightly darker gray on hover */
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+      /* Stronger glow effect on hover */
+    }
+
+    /* Responsive Styles */
+    @media (min-width: 600px) {
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      /* Adjust other styles as needed for larger screens */
+    }
+
+    /* Add Comp Button Styles */
+    .add-comp-button {
+      background-color: #ff7f00;
+      /* Orange background */
+      color: #fff;
+      /* White text */
+      cursor: pointer;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 16px;
+      margin-top: 5px;
+      box-shadow: 0 0 10px rgba(255, 127, 0, 0.5);
+      /* Subtle glow effect */
+      transition: all 0.3s ease;
+      /* Smooth transition effect */
+    }
+
+    /* Add Comp Button Hover Styles */
+    .add-comp-button:hover {
+      background-color: #ff6600;
+      /* Slightly darker orange on hover */
+      box-shadow: 0 0 15px rgba(255, 127, 0, 0.8);
+      /* Stronger glow effect on hover */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>ARV and MAO Calculator</h1>
+
+    <div class="section" id="subject-property-container">
+      <div class="section-title">Subject Property</div>
+      <div class="section-content">
+        <label for="subjectAddress">Address:</label>
+        <input type="text" id="subjectAddress" placeholder="Subject Property Address" oninput="calculate()">
+        <label for="subjectSquareFoot">Square Footage:</label>
+        <input type="number" id="subjectSquareFoot" placeholder="Subject Property Square Footage" oninput="calculate()">
+      </div>
+    </div>
+
+    <div class="section" id="comps-container">
+      <div class="section-title">Comparable Homes (Comps)</div>
+      <div class="section-content">
+        <p>Enter up to five comps' sold prices, square footage, and adjustments.</p>
+
+        <div id="comps">
+        </div> <button class="add-comp-button" onclick="addComp()">Add Comp </button>
+        <script>
+
+          /* Add Comp Button Styles */
+          button.add - comp - button {
+            background - color: #ff7f00; /* Orange background */
+            color: #fff; /* White text */
+            border: none;
+            padding: 8px 12px;
+            border - radius: 4px;
+            font - size: 16px;
+            cursor: pointer;
+            margin - top: 5px;
+            box - shadow: 0 0 10px rgba(255, 127, 0, 0.5); /* Subtle glow effect */
+            transition: all 0.3s ease; /* Smooth transition effect */
+          }
+
+          /* Add Comp Button Hover Styles */
+          button.add - comp - button:hover {
+            background - color: #ff6600; /* Slightly darker orange on hover */
+            box - shadow: 0 0 15px rgba(255, 127, 0, 0.8); /* Stronger glow effect on hover */
+          }
+        </script
+        </div>
+    </div>
+
+    <div class="section" id="calculation-container">
+        <div class="section-title">MAO Calculation</div>
+        <div class="section-content">
+            <label for="repairCosts">Repair Costs:</label>
+            <input type="number" id="repairCosts" oninput="calculate()">
+
+            <label for="profitMargin">Desired Profit Margin (%):</label>
+            <input type="number" id="profitMargin" oninput="calculate()">
+
+            <label for="wholesaleFee">Wholesale Fee:</label>
+            <input type="number" id="wholesaleFee" oninput="calculate()">
+
+            <label for="closingCostsPercentage">Closing Costs Percentage (%):</label>
+            <input type="range" id="closingCostsPercentage" min="0" max="25" value="0" oninput="calculate()">
+            <div id="closingCostsPercentageValue">0</div>
+        </div>
+    </div>
+  <div class="results-content">
+  <div class="arv-mao-results">
+      <p>ARV and MAO Calculation Results</p>
+      <p>Subject Property: Address: </p>
+      <p>ARV: $0.00</p>
+      <p>MAO: $0.00</p>
+      <p>Average Price per SqFt: $0.00</p>
+      <p>Repair Costs: $0.00</p>
+      <p>Wholesale Fee: $0.00</p>
+      <p>Buy Price (including Wholesale Fee): $0.00</p>
+      <p>Potential Flip Profit: $0.00</p>
+      <p>Total Estimated Costs : $0.00</p>
+  </div>
+
+    <!-- Seller Financing Calculator Section -->
+    <div class="section" id="seller-financing-container">
+        <div class="section-title">Seller Financing Calculator</div>
+        <div class="section-content">
+            <label for="buyPrice">Buy Price:</label>
+            <input type="number" id="buyPrice" placeholder="Buy Price" oninput="calculateCreativeTerms()">
+
+            <label for="interestRate">Interest Rate (%):</label>
+            <input type="number" id="interestRate" placeholder="Interest Rate" oninput="calculateCreativeTerms()">
+
+            <label for="loanTerm">Loan Term (years):</label>
+            <input type="number" id="loanTerm" placeholder="Loan Term" oninput="calculateCreativeTerms()">
+
+            <label for="downPaymentType">Down Payment :</label>
+            <input type="range" id="downPayment" min="0" max="100" value="10" oninput="calculateCreativeTerms()">
+            <div id="downPaymentValue">10%</div>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="section" id="results-container">
+        <div class="section-title">Results</div>
+        <div class="section-content results">
+ 
+                <div class="seller-financing-results">
+                    <p>Seller Financing Calculation Results</p>
+                    <p>Buy Price: $0.00</p>
+                    <p>Interest Rate: 0%</p>
+                    <p>Loan Term: 0 years</p>
+                    <p>Down Payment : 0%</p>
+                    <p>Down Payment Amount: $0.00</p>
+                    <p>Total Loan Amount: $0.00</p>
+                    <p>Monthly Payment: $0.00</p>
+                    <p>Total Interest Paid: $0.00</p>
+                </div>
+            </div>
+        </div>
+        <button class="copy-button" onclick="copyToClipboard()">Copy Results</button>
+        <button class="reset-button" onclick="reset()">Reset</button>
+    </div>
+</div>
+
+<!-- JavaScript Code -->
+<script>
+  let compCount = 0;
+
+  function addComp() {
+    if (compCount < 5) {
+      compCount++;
+      const compsContainer = document.getElementById("comps");
+      const newComp = document.createElement("div");
+      newComp.classList.add("comp");
+      newComp.innerHTML = `
+                    <label for="comp${compCount}price">Comp ${compCount} Price:</label>
+                    <input type="number" id="comp${compCount}price" placeholder="Sold Price" oninput="calculate()">
+                    <input type="number" id="comp${compCount}sqft" placeholder="Square Footage" oninput="calculate()">
+                    <select id="comp${compCount}adjustmentType" onchange="calculate()">
+                        <option value="none">No Adjustment</option>
+                        <option value="set">Set Amount</option>
+                        <option value="percentage">Percentage</option>
+                    </select>
+                    <input type="number" id="comp${compCount}adjustmentValue" placeholder="Adjustment Value" oninput="calculate()">
+                `;
+      compsContainer.appendChild(newComp);
+    }
+  }
+
+  function calculate() {
+    const comps = [];
+
+    // Retrieve input values for comps
+    for (let i = 1; i <= compCount; i++) {
+      const soldPrice = parseFloat(document.getElementById(`comp${i}price`).value) || 0;
+      const squareFeet = parseFloat(document.getElementById(`comp${i}sqft`).value) || 0;
+      const adjustmentType = document.getElementById(`comp${i}adjustmentType`).value;
+      const adjustmentValue = parseFloat(document.getElementById(`comp${i}adjustmentValue`).value) || 0;
+
+      let adjustedPrice = soldPrice;
+      if (adjustmentType === 'set') {
+        adjustedPrice += adjustmentValue;
+      } else if (adjustmentType === 'percentage') {
+        adjustedPrice *= (1 + adjustmentValue / 100);
+      }
+
+      if (soldPrice > 0 && squareFeet > 0) {
+        comps.push({soldPrice: adjustedPrice, squareFeet});
+      }
+    }
+
+    // ARV and MAO calculation using adjusted comps
+    const repairCosts = parseFloat(document.getElementById("repairCosts").value) || 0;
+    const profitMargin = parseFloat(document.getElementById("profitMargin").value) / 100 || 0;
+    const wholesaleFee = parseFloat(document.getElementById("wholesaleFee").value) || 0;
+    const closingCostsPercentage = parseFloat(document.getElementById("closingCostsPercentage").value) || 0;
+
+    const averagePricePerSqFt = comps.length > 0 ? comps.reduce((sum, comp) => sum + comp.soldPrice / comp.squareFeet, 0) / comps.length : 0;
+
+    const subjectSquareFoot = parseFloat(document.getElementById("subjectSquareFoot").value) || 0;
+    const arv = averagePricePerSqFt * subjectSquareFoot;
+
+    const mao = arv * (1 - profitMargin) - repairCosts - wholesaleFee;
+    const closingCosts = (mao + wholesaleFee) * (closingCostsPercentage / 100);
+    const buyPrice = mao + wholesaleFee;
+    const potentialProfit = arv - buyPrice - repairCosts - closingCosts;
+    const subjectAddress = document.getElementById("subjectAddress").value;
+
+    const arvMaoResults = document.querySelector(".arv-mao-results");
+    arvMaoResults.innerHTML = `
+                <p>Subject Property: Address: ${subjectAddress}</p>
+                <p>ARV: $${arv.toFixed(2)}</p>
+                <p>MAO: $${mao.toFixed(2)}</p>
+                <p>Average Sold Price: $${(arv / subjectSquareFoot).toFixed(2)}</p>
+                <p>Average Price per SqFt: $${averagePricePerSqFt.toFixed(2)}</p>
+                <p>Repair Costs: $${repairCosts.toFixed(2)}</p>
+                <p>Wholesale Fee: $${wholesaleFee.toFixed(2)}</p>
+                <p>Buy Price (including Wholesale Fee): $${buyPrice.toFixed(2)}</p>
+                <p>Potential Flip Profit: $${potentialProfit.toFixed(2)}</p>
+                <p>Total Estimated Costs: $${(repairCosts + closingCosts + buyPrice).toFixed(2)}</p>
+            `;
+
+    const closingCostsPercentageValue = document.getElementById("closingCostsPercentageValue");
+    closingCostsPercentageValue.textContent = closingCostsPercentage;
+  }
+
+  // Additional JavaScript for the Seller Financing Calculator
+  function calculateCreativeTerms() {
+    const downPaymentPercentage = parseFloat(document.getElementById("downPayment").value);
+    const buyPrice = parseFloat(document.getElementById("buyPrice").value) || 0;
+    const downPayment = (downPaymentPercentage / 100) * buyPrice;
+    const totalLoanAmount = buyPrice - downPayment;
+    const interestRate = parseFloat(document.getElementById("interestRate").value) || 0;
+    const loanTerm = parseInt(document.getElementById("loanTerm").value) || 0;
+    const monthlyInterestRate = interestRate / (12 * 100);
+    const numberOfPayments = loanTerm * 12;
+    const monthlyPayment =
+      (totalLoanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+      (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+    const totalInterestPaid = monthlyPayment * numberOfPayments - totalLoanAmount;
+
+    const sellerFinancingResults = document.querySelector(".seller-financing-results");
+    sellerFinancingResults.innerHTML = `
+                <p>Buy Price: $${buyPrice.toFixed(2)}</p>
+                <p>Interest Rate: ${interestRate}%</p>
+                <p>Loan Term: ${loanTerm} years</p>
+                <p>Down Payment Type: ${downPaymentPercentage}%</p>
+                <p>Down Payment Amount: $${downPayment.toFixed(2)}</p>
+                <p>Total Loan Amount: $${totalLoanAmount.toFixed(2)}</p>
+                <p>Monthly Payment: $${monthlyPayment.toFixed(2)}</p>
+                <p>Total Interest Paid: $${totalInterestPaid.toFixed(2)}</p>
+            `;
+
+    const downPaymentValue = document.getElementById("downPaymentValue");
+    downPaymentValue.textContent = `${downPaymentPercentage}%`;
+  }
+
+  function copyToClipboard() {
+    const resultsContainer = document.querySelector('.results-content');
+    const range = document.createRange();
+    range.selectNode(resultsContainer);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    try {
+      const successful = document.execCommand('copy');
+      const message = successful ? 'Results copied to clipboard!' : 'Failed to copy results.';
+      alert(message);
+    } catch (err) {
+      console.log('Error copying results: ', err);
+    }
+
+    selection.removeAllRanges();
+  }
+
+  function reset() {
+    compCount = 0;
+    const compsContainer = document.getElementById("comps");
+    compsContainer.innerHTML = "";
+    document.getElementById("subjectAddress").value = "";
+    document.getElementById("subjectSquareFoot").value = "";
+    document.getElementById("repairCosts").value = "";
+    document.getElementById("profitMargin").value = "";
+    document.getElementById("wholesaleFee").value = "";
+    document.getElementById("closingCostsPercentage").value = 10;
+    document.getElementById("closingCostsPercentageValue").textContent = "10";
+    document.querySelector(".arv-mao-results").innerHTML = "";
+    document.querySelector(".seller-financing-results").innerHTML = "";
+  }
+
+  // Initial calculation when the page loads for the Seller Financing Calculator
+  calculateCreativeTerms();
+          // Sound effects
+          const clickSound = new Audio('75235__creek23__cha-ching.wav'); // Replace 'click_sound.mp3' with the path to your click sound file
+          const typingSound = new Audio('566888__lennartgreen__click-metronome-atonal-high.wav'); // Replace 'typing_sound.mp3' with the path to your typing sound file
+          const moneySound = new Audio('money_sound.mp3'); // Replace 'money_sound.mp3' with the path to your money sound file
+          // Function to play click sound
+          function playClickSound() {
+            clickSound.play();
+          }
+
+          // Function to play typing sound
+          function playTypingSound() {
+            typingSound.play();
+          }
+          // Add event listeners to buttons to play click sound
+          document.querySelectorAll('button').forEach(button => {
+            if (button.classList.contains('copy-button')) {
+              button.addEventListener('click', playMoneySound); // Change to playMoneySound for copy button
+            } else {
+              button.addEventListener('click', playClickSound); // Default to playClickSound for other buttons
+            }
+          });
+
+
+
+</script>
+</body>
+
+</html>
